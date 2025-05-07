@@ -1,0 +1,104 @@
+### 📄 Resumen completo: Diagramas TCP con pérdidas y cómo resolverlos
+
+---
+
+### ✅ ¿Qué es un diagrama temporal TCP?
+
+Es un esquema que muestra, flecha a flecha, cómo se intercambian los segmentos entre un emisor (A) y un receptor (B):
+
+* Establecimiento (3-way handshake)
+* Envío de datos
+* Confirmaciones (ACK)
+* Retransmisiones si hay pérdidas
+
+### 🔑 PASOS PARA RESOLVERLOS
+
+**1️⃣ Establecimiento de conexión (3-way handshake)**
+
+* A → B: SYN (seq = x)
+* B → A: SYN-ACK (seq = y, ack = x + 1)
+* A → B: ACK (ack = y + 1)
+  ✅ Solo después de esto se envían datos.
+
+**2️⃣ Dividir los datos en segmentos**
+
+* Calcula cuántos segmentos necesitas:
+
+```
+Total datos / MSS = número de segmentos
+```
+
+✅ Cada segmento lleva:
+
+* seq → número de secuencia
+* ack → número de confirmación
+* win → ventana de recepción
+* len → longitud de datos
+
+**3️⃣ Identificar pérdidas**
+
+* Marca los segmentos que se pierden.
+* TCP actúa dependiendo:
+
+  * Si no recibe ACK → espera timeout → retransmite.
+  * Si recibe 3 ACK duplicados → fast retransmit.
+
+**4️⃣ Dibujar el esquema**
+
+* Usa flechas inclinadas:
+
+```
+A → B: segmentos (seq, len)
+B → A: ACKs (ack)
+```
+
+* Marca retransmisiones.
+
+### 🛠 EJEMPLO PASO A PASO (del enunciado)
+
+**Datos:**
+
+* A envía 2000 bytes a B.
+* MSS = 500 bytes → 4 segmentos.
+* Ventana A = 2500 bytes.
+* Ventana B = 1500 bytes.
+* Primer y tercer segmento de datos de A se pierden.
+
+**Secuencia:**
+1️⃣ 3-way handshake:
+
+* A → B: SYN (seq = 0)
+* B → A: SYN-ACK (seq = 0, ack = 1)
+* A → B: ACK (ack = 1)
+
+2️⃣ Envío de datos:
+
+* A → B: Segmento 1 (seq = 1, len = 500) → SE PIERDE
+* A → B: Segmento 2 (seq = 501, len = 500)
+* B → A: ACK 1001 (confirmando hasta aquí)
+* A → B: Segmento 3 (seq = 1001, len = 500) → SE PIERDE
+* A → B: Segmento 4 (seq = 1501, len = 500)
+* B → A: ACK 2001 (último correcto recibido)
+
+3️⃣ Retransmisión tras timeout:
+
+* A → B: Retransmite segmento 1 (seq = 1, len = 500)
+* B → A: ACK 2001 (ya estaba completo)
+* A → B: Retransmite segmento 3 (seq = 1001, len = 500)
+* B → A: ACK 2001 (ya estaba completo)
+
+✅ Final: todos los datos confirmados.
+
+### ⚠ PUNTOS CLAVE A RECORDAR
+
+* El número de secuencia sube por cada byte (no por segmento).
+* El receptor confirma con el ACK el siguiente byte esperado.
+* Si se pierden paquetes, TCP espera timeout o usa fast retransmit (si hay 3 ACK duplicados).
+* La ventana limita cuántos bytes pueden ir "en vuelo".
+
+### 🚀 PRÁCTICA EXTRA
+
+Si quieres ejercicios prácticos con otros datos y soluciones resueltas, ¡pídemelos!
+También puedo prepararte diagramas dibujados o simuladores para practicar paso a paso.
+
+¡Mucho ánimo y a por el examen! 💪📘

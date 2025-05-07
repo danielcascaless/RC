@@ -1,0 +1,98 @@
+### 📄 Resumen completo: Cómo resolver ejercicios tipo P3 (ARP, ICMP y switches)
+
+---
+
+### ✅ ¿Qué pide este ejercicio?
+
+Este tipo de ejercicios te hace simular cómo funciona la red cuando un equipo (como PC2) quiere comunicarse (por ejemplo, hacer ping) a un destino lejano (como 203.0.113.100).
+
+Se divide en:
+✔ Dibujar la topología sin VLAN.
+✔ Mostrar paso a paso los intercambios ARP e IP.
+✔ Mostrar cómo los switches aprenden las MAC.
+
+---
+
+### 🔑 PASOS PARA RESOLVERLO
+
+1️⃣ **Identificar el recorrido**: ¿quién habla con quién? ¿Qué saltos hay?
+Ejemplo: PC2 → R2 → R1 → gateway → Internet → y vuelta.
+
+2️⃣ **Resolver las direcciones MAC (ARP)**: Antes de enviar un paquete, cada equipo necesita conocer la MAC destino (si está en la misma red) → usa ARP para preguntar.
+
+3️⃣ **Listar los paquetes (ARP e IP)**: Escribir cada paso:
+
+* ARP Request → broadcast.
+* ARP Reply → respuesta directa.
+* Paquete IP (ICMP Request) → una vez resueltas las MAC.
+
+4️⃣ **Anotar lo que aprende cada switch**: Cuando un switch ve salir un paquete por un puerto, aprende que la MAC origen está por ese puerto.
+
+---
+
+### 🛠 EJEMPLO RESUELTO (Final\_Dic\_2024)
+
+**Escenario:** PC2 hace ping (ICMP) a 203.0.113.100.
+
+✅ **Pasos del intercambio (b):**
+
+| Paso | Qué ocurre                                                       | Cómo lo sabes                                              |
+| ---- | ---------------------------------------------------------------- | ---------------------------------------------------------- |
+| 1    | PC2 → ARP Request (broadcast) para saber la MAC de R2            | PC2 no conoce la MAC del gateway (192.168.20.1) → usa ARP. |
+| 2    | R2 → ARP Reply con su MAC                                        | El router responde con su MAC en esa red.                  |
+| 3    | PC2 → ICMP Request (IP) a destino, MAC destino = R2              | Ahora PC2 sabe la MAC de R2 y puede enviarle el paquete.   |
+| 4    | R2 → ARP Request (broadcast) para saber MAC de R1 (192.168.50.1) | R2 no sabe la MAC del siguiente salto, pide por ARP.       |
+| 5    | R1 → ARP Reply con su MAC                                        | R1 responde al ARP.                                        |
+| 6    | R2 → ICMP Request (IP) a R1                                      | R2 reenvía usando MAC de R1.                               |
+| 7    | R1 → ARP Request (broadcast) para saber MAC del gateway          | R1 necesita MAC del router final hacia Internet.           |
+| 8    | Gateway → ARP Reply                                              | Gateway responde.                                          |
+| 9    | R1 → ICMP Request (IP) a Internet                                | Ya puede enviar el paquete.                                |
+| 10   | Gateway → ICMP Reply                                             | El destino responde.                                       |
+| 11   | R1 → R2 → ICMP Reply                                             | Respuesta de vuelta.                                       |
+| 12   | R2 → PC2 → ICMP Reply                                            | Respuesta final.                                           |
+
+✅ **Tabla del examen (b, ya resuelta):**
+
+| MAC Origen | MAC Destino | Tipo | VLAN | IP Origen     | MAC Origen (ARP) | IP Destino    | MAC Destino (ARP) | Superior     |
+| ---------- | ----------- | ---- | ---- | ------------- | ---------------- | ------------- | ----------------- | ------------ |
+| PC2\:E0    | BCAST       | ARP  | 20   | 192.168.20.10 | PC2\:E0          | 192.168.20.1  | 0:0               | -            |
+| R2\:E0     | PC2\:E0     | ARP  | 20   | 192.168.20.1  | R2\:E0           | 192.168.20.10 | PC2\:E0           | -            |
+| PC2\:E0    | R2\:E0      | IP   | 20   | 192.168.20.10 | -                | 203.0.113.100 | -                 | ICMP Request |
+| R2\:E0     | BCAST       | ARP  | 50   | 192.168.50.2  | R2\:E0           | 192.168.50.1  | 0:0               | -            |
+| R1\:E0     | R2\:E0      | ARP  | 50   | 192.168.50.1  | R1\:E0           | 192.168.50.2  | R2\:E0            | -            |
+| R2\:E0     | R1\:E0      | IP   | 50   | 192.168.20.10 | -                | 203.0.113.100 | -                 | ICMP Request |
+| R1\:ppp0   | BCAST       | ARP  | -    | 80.70.60.129  | R1\:ppp0         | 80.70.60.130  | 0:0               | -            |
+| GW\:pp0    | R1\:ppp0    | ARP  | -    | 80.70.60.130  | GW\:pp0          | 80.70.60.129  | R1\:ppp0          | -            |
+| R1\:ppp0   | GW\:pp0     | IP   | -    | 80.70.60.129  | -                | 203.0.113.100 | -                 | ICMP Request |
+| GW\:pp0    | R1\:ppp0    | IP   | -    | 203.0.113.100 | -                | 80.70.60.129  | -                 | ICMP Reply   |
+| R1\:E0     | R2\:E0      | IP   | 50   | 203.0.113.100 | -                | 192.168.20.10 | -                 | ICMP Reply   |
+| R2\:E0     | PC2\:E0     | IP   | 20   | 203.0.113.100 | -                | 192.168.20.10 | -                 | ICMP Reply   |
+
+✅ **Cómo sabes qué poner:**
+
+* MAC Origen/Destino → según quién envía a quién, y si es ARP broadcast.
+* Tipo → ARP si es consulta/respuesta MAC; IP si es ICMP (ping).
+* VLAN → según la red en que se muevan (20, 50, etc.).
+* Superior → ICMP solo cuando es paquete IP, vacío en ARP.
+
+✅ **Parte c (aprendizaje switches):**
+
+| Paso                                  | Switch 1 anota | Switch 1 transmite por | Switch 2 anota | Switch 2 transmite por |
+| ------------------------------------- | -------------- | ---------------------- | -------------- | ---------------------- |
+| (t=1) PC2 hace ARP request en VLAN 20 | PC2←2          | 3                      | PC2←1          | 3, 5                   |
+| (t=2) R2 contesta ARP reply a PC2     | R2←3           | 2                      | R2←5           | 1                      |
+| (t=3) PC2 envía ICMP Request a R2     | -              | 3                      | -              | 5                      |
+| (t=4) R2 hace ARP request en VLAN 50  | -              | 4                      | -              | 1                      |
+| (t=5) R1 contesta ARP reply a R2      | R1←4           | 3                      | R1←1           | 5                      |
+| (t=6) R2 reenvía ICMP Request a R1    | -              | 4                      | -              | 1                      |
+| (t=7) R1 reenvía ICMP Reply a R2      | -              | 3                      | -              | 5                      |
+| (t=8) R2 reenvía ICMP Reply a PC2     | -              | 2                      | -              | 1                      |
+
+✅ Cómo sabes qué poner:
+
+* "Anota" → qué MAC origen aprendió el switch y por qué puerto.
+* "Transmite por" → por qué puerto envía el tráfico cuando no sabe a dónde va.
+
+---
+
+Si quieres, puedo prepararte más ejercicios similares o ejemplos para practicar. ¡Avísame! 💪📘

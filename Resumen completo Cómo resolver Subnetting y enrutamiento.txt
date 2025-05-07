@@ -1,0 +1,98 @@
+### 📄 Resumen completo: Cómo resolver P2 (Subnetting y Enrutamiento)
+
+---
+
+### ✅ ¿Qué pide este tipo de ejercicio?
+
+✔ Dividir un rango IP general en subredes pequeñas según las necesidades.
+✔ Calcular para cada subred:
+
+* Dirección de red.
+* Máscara (en bits y decimal).
+* Dirección de broadcast.
+* Rango de hosts válidos.
+  ✔ Asignar IPs a los interfaces de los routers (usando la última IP válida).
+  ✔ Rellenar las tablas de enrutamiento de cada router.
+
+---
+
+### 🔑 PASOS PARA RESOLVERLO
+
+1️⃣ Analiza cuántos hosts necesita cada subred.
+2️⃣ Calcula el tamaño mínimo que cubra esos hosts → elige la máscara adecuada.
+3️⃣ Asigna bloques empezando desde el rango general, colocando primero los bloques grandes.
+4️⃣ Para cada subred calcula:
+
+* Dirección de red.
+* Primer host (red +1).
+* Último host (broadcast -1).
+* Broadcast (última dirección del bloque).
+  5️⃣ Asigna la última IP válida a los interfaces de los routers.
+  6️⃣ Llena las tablas de enrutamiento:
+* Redes directamente conectadas → "\*" como gateway.
+* Redes remotas → gateway con la dirección del siguiente salto.
+* Default → salto hacia Internet.
+
+---
+
+### 🛠 EJEMPLO RESUELTO: Final\_Dic\_2024
+
+**Enunciado clave:**
+
+* Rango general → 10.41.207.0/24.
+* RA.ppp0 = 10.41.207.25, RB.ppp0 = 10.41.207.26, RB.ppp1 = 155.54.30.26.
+* Asignar la última IP válida de cada subred a las interfaces.
+
+### 🔶 Subredes calculadas
+
+| Subred      | Dirección de red / máscara          | Broadcast     |
+| ----------- | ----------------------------------- | ------------- |
+| Subred 1    | 10.41.207.16 /29 (255.255.255.248)  | 10.41.207.23  |
+| Subred 2    | 10.41.207.32 /27 (255.255.255.224)  | 10.41.207.63  |
+| Subred 3    | 10.41.207.128 /25 (255.255.255.128) | 10.41.207.255 |
+| Subred 4    | 10.41.207.64 /26 (255.255.255.192)  | 10.41.207.127 |
+| Subred 5    | 10.41.207.0 /28 (255.255.255.240)   | 10.41.207.15  |
+| RA-RB       | 10.41.207.24 /30 (255.255.255.252)  | 10.41.207.27  |
+| RB-Internet | 155.54.30.24 /30 (255.255.255.252)  | 155.54.30.27  |
+
+### 🔶 Interfaces de los routers
+
+| Interfaz | Dirección IP asignada                     |
+| -------- | ----------------------------------------- |
+| RA.eth0  | 10.41.207.22 (última válida en Subred 1)  |
+| RA.eth1  | 10.41.207.62 (última válida en Subred 2)  |
+| RA.eth2  | 10.41.207.254 (última válida en Subred 3) |
+| RB.eth0  | 10.41.207.126 (última válida en Subred 4) |
+| RB.eth1  | 10.41.207.14 (última válida en Subred 5)  |
+
+### 🔶 Tabla de enrutamiento de RA
+
+| Destino       | Gateway      | Máscara         | Interfaz |
+| ------------- | ------------ | --------------- | -------- |
+| 10.41.207.16  | \*           | 255.255.255.248 | eth0     |
+| 10.41.207.32  | \*           | 255.255.255.224 | eth1     |
+| 10.41.207.128 | \*           | 255.255.255.128 | eth2     |
+| 10.41.207.24  | \*           | 255.255.255.252 | ppp0     |
+| Default       | 10.41.207.26 | -               | ppp0     |
+
+### 🔶 Tabla de enrutamiento de RB
+
+| Destino       | Gateway      | Máscara         | Interfaz |
+| ------------- | ------------ | --------------- | -------- |
+| 10.41.207.64  | \*           | 255.255.255.192 | eth0     |
+| 10.41.207.0   | \*           | 255.255.255.240 | eth1     |
+| 10.41.207.24  | \*           | 255.255.255.252 | ppp0     |
+| 155.54.30.24  | \*           | 255.255.255.252 | ppp1     |
+| 10.41.207.16  | 10.41.207.25 | 255.255.255.248 | ppp0     |
+| 10.41.207.32  | 10.41.207.25 | 255.255.255.224 | ppp0     |
+| 10.41.207.128 | 10.41.207.25 | 255.255.255.128 | ppp0     |
+| Default       | 155.54.30.25 | -               | ppp1     |
+
+### ⚠ CONSEJOS FINALES
+
+✅ Siempre empieza por los bloques grandes.
+✅ Usa máscaras correctas para ajustar el número de hosts.
+✅ Revisa las IPs para no solaparte ni dejar huecos.
+✅ Asigna correctamente los gateways en las rutas remotas.
+
+Si quieres, puedo prepararte ejercicios de práctica o tablas vacías para rellenar. ¡Avísame! 💪📘

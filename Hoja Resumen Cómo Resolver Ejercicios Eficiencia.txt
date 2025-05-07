@@ -1,0 +1,121 @@
+### 📄 Hoja Resumen: Cómo Resolver Ejercicios de Eficiencia TCP
+
+---
+
+#### ✅ PASOS CLAVE
+
+**1️⃣ Datos que debes identificar:**
+
+* MSS (Maximum Segment Size) → en bytes
+* Ventana (W) → en bytes
+* Longitud del enlace (L) → en km
+* Velocidad del enlace (Vt) → en bps (ojo, si te dan en Mbps → multiplica ×10^6)
+* Cabecera TCP/IP → normalmente 40 bytes (a menos que te den otro dato)
+
+---
+
+**2️⃣ Calcula los tiempos básicos**
+
+* Tiempo de propagación (tprop):
+
+```
+tprop = L (m) / c
+c ≈ 2 × 10^8 m/s (velocidad de la señal en cable/fibra)
+```
+
+* Tiempo de transmisión de un segmento con datos (tseg):
+
+```
+tseg = ((MSS + cabecera) × 8) / Vt
+```
+
+* Tiempo de transmisión de un ACK vacío (tack):
+
+```
+tack = (cabecera × 8) / Vt
+```
+
+* Round Trip Time (RTT):
+
+```
+RTT = 2 × tprop
+```
+
+---
+
+**3️⃣ Número máximo de segmentos en vuelo (N)**
+
+```
+N = min(W / MSS, RTT / tseg)
+```
+
+(Usa solo W / MSS si no hay otra limitación)
+
+---
+
+**4️⃣ Tiempo útil (tutil)**
+
+```
+tutil = tseg
+```
+
+---
+
+**5️⃣ Eficiencia máxima (U)**
+
+```
+U = (N × tutil) / (RTT + tutil + tack)
+```
+
+(Si simplifican el ejercicio, a veces piden solo:)
+
+```
+U ≈ (N × MSS) / (RTT × Vt)
+```
+
+---
+
+#### ⚠ CUIDADO CON LAS UNIDADES
+
+✅ Mbps → multiplica por 10^6 → pasa a bps
+✅ km → multiplica por 1000 → pasa a metros
+✅ Bytes → multiplica por 8 → pasa a bits
+✅ Todos los tiempos deben ir en segundos
+
+---
+
+### 🚀 EJEMPLO RESUELTO
+
+**Datos:**
+
+* MSS = 1000 bytes
+* Ventana = 10,000 bytes
+* L = 1000 km
+* Vt = 10 Mbps (10 × 10^6 bps)
+
+**1️⃣ Convertimos:**
+
+* L = 1,000,000 m
+* Vt = 10,000,000 bps
+
+**2️⃣ Calculamos tiempos:**
+
+* tprop = 1,000,000 / (2 × 10^8) ≈ 0.005 s = 5 ms
+* tseg = (1040 × 8) / 10^7 ≈ 0.000832 s ≈ 0.832 ms
+* tack ≈ (40 × 8) / 10^7 ≈ 0.000032 s ≈ 0.032 ms
+* RTT = 2 × 5 ms = 10 ms
+
+**3️⃣ N:**
+
+* N = 10,000 / 1000 = 10 segmentos
+
+**4️⃣ Eficiencia:**
+
+* U ≈ (10 × 0.832 ms) / (10 ms + 0.832 ms + 0.032 ms)
+* U ≈ (8.32 ms) / (10.864 ms) ≈ 0.765 → **76.5% eficiencia**
+
+---
+
+✅ ¡Listo! Con este esquema puedes resolver cualquier ejercicio paso a paso.
+
+Si quieres, te puedo preparar ejercicios extra para practicar. ¡Pídemelos!
