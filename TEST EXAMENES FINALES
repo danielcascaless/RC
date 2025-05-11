@@ -1,0 +1,269 @@
+PREGUNTAS TIPO TEST EXAMENES FINALES
+
+**FINAL DIC 2024**
+
+T1. Con el protocolo CSMA/CA es FALSO que:
+✅a) Cuando se produce una colisión, se deja de transmitir la trama y se espera un tiempo aleatorio (backoff).
+ b) Si el medio está ocupado, la estación debe esperar un tiempo fijo o aleatorio (backoff).
+ c) Se escucha el medio antes de transmitir.
+
+T2. Indica cuál de las siguientes afirmaciones es correcta respecto al aprendizaje de conmutadores:
+ a) Un conmutador aprende por qué puerto tiene que enviar las tramas dirigidas únicamente a los hosts que tiene 
+directamente conectados.
+ b) Un conmutador aprende por qué puerto tiene que enviar las tramas dirigidas a los conmutadores que están 
+directamente conectados a él.
+✅c) Un conmutador aprende por qué puerto ha de enviar las tramas dirigidas tanto a hosts directamente accesibles 
+como a otros conectados a través de otros switches, siempre que haya procesado una trama procedente de ellos.
+
+T3. ¿Cuándo es preciso el uso de timeout para los envíos de un servidor TCP?
+✅a) Sólo si también envía datos.
+ b) Para controlar los segmentos de confirmación perdidos.
+ c) Para la pérdida de mensajes ACK.
+
+T4. ¿Cuál de las siguientes duraciones sería la más adecuada para un timeout en el protocolo TCP?
+ a) 0.5 x RTT.
+ b) RTT.
+✅c) 1.5 x RTT.
+
+T5. Indica cuál de las siguientes afirmaciones sobre circuitos virtuales es FALSA:
+ a) La ruta que siguen los paquetes es fija.
+ b) Pueden ofrecer calidad de servicio.
+✅c) Contienen la dirección del host final para el encaminamiento.
+
+T6. ¿Cuál de los siguientes protocolos se apoya en el uso de CSMA/CD?
+ a) IEEE 802.15
+✅b) IEEE 802.3 
+ c) IEEE 802.11
+
+T7. Indica cuál de los siguientes argumentos es una razón para que exista un campo TTL en la cabecera IP:
+ a) Permite calcular el tiempo que ha tardado en llegar un paquete a su destino.
+✅ b) Evita que por un error en las tablas de encaminamiento haya paquetes que estén eternamente circulando por 
+Internet saturándola.
+ c) Es la única manera de implementar una utilidad como traceroute que me indica por dónde ha ido pasando un 
+paquete.
+
+T8. El organismo encargado de asignar los nombres de dominio y las direcciones IP es: 
+ a) IEEE.
+ b) IETF.
+✅c) ICANN.
+
+T9. Indica cuál de las siguientes afirmaciones sobre TCP es cierta:
+ a) En la negociación tres pasos que A realiza para establecer una conexión TCP con B, B ya puede enviar datos en 
+su segmento de aceptación.
+ b) Una vez establecida la conexión TCP, los segmentos tienen siempre el tamaño MSS salvo el último del mensaje 
+que puede ser menor.
+✅c) TCP no guarda información acerca de la longitud del mensaje de nivel de aplicación que transporta.
+
+T10. Indica cuál de las siguientes afirmaciones es CIERTA:
+ a) Un segmento UDP está directamente contenido dentro de una trama Ethernet.
+✅b) Un paquete ARP está directamente contenido dentro de una trama Ethernet.
+ c) Un paquete ICMP está directamente contenido dentro de una trama Ethernet.
+
+T11. Indica cuál de las siguientes ordenaciones de protocolos es la correcta, de nivel superior a nivel inferior (= 
+significa mismo nivel; > significa nivel superior):
+ a) FTP > UDP > TCP > IEEE 802.3 = IEEE 802.11
+ b) HTTP > DHCP > TCP = UDP > IP > IEEE 802.11. 
+✅c) DNS = DHCP > UDP > IP > IEEE 802.3.
+
+T12. ¿Cuál de los siguientes protocolos NO funciona sobre UDP?
+ a) DHCP
+ b) DNS
+✅c) HTTP
+
+T13. Durante una conversación TCP el host A establece una ventana de 2000 bytes y el host B de 1500 bytes. Si el 
+MSS es de 500 bytes, indica cuál de las siguientes afirmaciones es CIERTA:
+ a) Se puede activar Fast Retransmit en ambos sentidos.
+ b) Se puede activar Fast Retransmit de A a B.
+✅c) Se puede activar Fast Retransmit de B a A.
+
+T14. Un grupo de hosts que se comunican entre sí mediante WiFi sin utilizar un AP se denomina:
+✅a) IBSS.
+ b) BSS.
+ c) ESS.
+
+T15. Indica cual de los siguientes órdenes, de mayor a menor duración de tiempo, es el correcto:
+✅a) DIFS > PIFS > SIFS.
+ b) DIFS > SIFS > PIFS.
+ c) SIFS > DIFS > PIFS.
+
+
+**FINAL MAYO 2024**
+
+T1. Cuál de los siguientes elementos no se encuentra en el equipo que habitualmente te pone un proveedor 
+de Internet en casa:
+ a) Conmutador Ethernet
+ b) Punto de acceso inalámbrico
+✅c) Servidor DNS
+
+T2. Un proceso quiere enviar un mensaje de 522 bytes a un proceso destino usando una conexión TCP ya 
+existente que usa IP como nivel de red y Ethernet como nivel de enlace. ¿Qué porcentaje de los bytes 
+transmitidos por la capa física corresponden al mensaje?:
+✅ a) 90%
+ b) 92,88%
+ c) 96,31%
+
+T3. ¿Cuál de las siguientes funciones NO es responsabilidad del nivel de transporte?
+ a) Multiplexión y demultiplexión
+✅b) Encriptar la comunicación
+ c) Recuperarse ante errores de comunicación
+
+T4. ¿Cuál de los siguientes pasos no pertenece al establecimiento de una conexión TCP?
+ a) 3-way handshake
+ b) Asignación de direcciones IP
+ c) Establecimiento de los parámetros de la ventana de recepción y tamaño máximo de segmento
+
+T5. ¿Qué mecanismo usa TCP para garantizar que los segmentos se entregan en orden?
+✅a) Número de secuencia
+ b) Establecimiento de un buffer de recepción
+ c) Timeout
+
+T6. ¿Cuál es el propósito principal del protocolo ICMP?
+ a) Proporcionar una comunicación segura entre dispositivos de una red
+ b) Facilitar la configuración automática de las direcciones IP de los dispositivos
+✅c) Permitir que los dispositivos de la red envíen mensajes de control y error entre sí.
+
+T7. ¿Cuál es el propósito principal de las subredes en una red IP?
+ a) Mejorar la velocidad de transmisión de datos.
+✅b) Reducir el tráfico de red al segmentarla en partes más pequeñas.
+ c) Aumentar la seguridad de la red ante ciberataques.
+
+T8. ¿Cuál es el propósito principal del router en una red?:
+✅a) Transferir datos entre redes separadas para dirigirlos hacia su destino.
+ b) Filtrar el tráfico de red para protegerla ante ciberataques.
+ c) Proporcionar acceso a Internet a los dispositivos conectados a la red local.
+
+T9. ¿Qué tipo de mensaje envía un cliente DHCP para solicitar una dirección IP y otros parámetros de 
+configuración de red?
+ a) Mensaje de solicitud de renovación (Renewal Request).
+✅b) Mensaje de descubrimiento (Discover).
+ c) Mensaje de oferta (Offer).
+
+T10. ¿Qué método de acceso utiliza Ethernet cuando varios dispositivos intentan transmitir datos 
+simultáneamente y se produce una colisión?
+✅a) CSMA/CD.
+ b) Token Ring.
+ c) CSMA/CA.
+
+T11. ¿Cuál es el propósito del estándar IEEE 802.1Q en una red Ethernet?
+ a) Especifica el formato de las tramas Ethernet.
+ b) Proporciona seguridad de red mediante el cifrado de datos.
+✅c) Permite el etiquetado de tráfico para la segmentación de redes virtuales (VLAN).
+
+T12. ¿Cuál es la principal desventaja de utilizar un concentrador (hub) en una red Ethernet en 
+comparación con un conmutador (switch)?
+ a) Permite conectar menos equipos a la red.
+✅b) Tiene una mayor cantidad de colisiones de datos.
+ c) No admite cables tan largos como el switch.
+
+T13. ¿Cuál es el principal desafío asociado con las estaciones ocultas en las comunicaciones Wi-Fi?
+ a) Interferencia de otras redes inalámbricas.
+ b) Reducción de la velocidad de transmisión de datos.
+✅c) Posibilidad de colisiones de datos que no pueden ser detectadas por otras estaciones en la red.
+
+T14. ¿Cómo sabe un dispositivo Wi-Fi emisor que se ha producido una colisión?
+ a) Examina el espectro de frecuencias usado para transmitir para ver si aumenta el nivel de la señal de 
+forma anómala.
+✅b) Lo deduce del hecho de no recibir un ACK por parte del receptor dentro de un tiempo establecido.
+ c) Usa una codificación especial que cuando hay una colisión produce un código incorrecto. Mientras se 
+emite, se lee la señal y si el código es incorrecto, deduce que ha habido una colisión.
+
+T15. ¿Cuál es la relación entre la velocidad de modulación (Vm) y la de transmisión (Vt), si n es el 
+número de estados que permite la señal?
+✅a) Vt = Vm * log2(n)
+ b) Vm = n * log2(Vt)
+ c) Vt = 1/Vm
+
+
+**FINAL MAYO 2023**
+
+
+T1. ¿Cuándo envía un router un mensaje ICMP Redirect?
+ a) Cuando recibe de otro router que se encuentra en su misma subred un paquete para ser enrutado y, según su tabla 
+de encaminamiento, tendría que enviarlo a un tercer router de la misma subred.
+✅b) Cuando recibe de un host de su subred un paquete para ser enrutado y según su tabla de encaminamiento, tendría 
+que enviarlo a otro router en la misma subred.
+ c) Cuando recibe un paquete, y la tabla de encaminamiento le dice que tiene que enviarlo por el mismo interfaz por 
+donde le ha llegado, ya que esto indica que quien se lo envió tiene mal la tabla de encaminamiento.
+
+T2. Indica cuál de las siguientes afirmaciones es CIERTA:
+✅a) El checksum es un campo de 16 bits para controlar errores que se encuentra tanto en la cabecera TCP como en la 
+UDP.
+ b) El protocolo UDP exige un paso de establecimiento de conexión previo al envío de datos por parte de un cliente 
+a un servidor.
+ c) Una cabecera UDP puede llegar, en casos concretos, a ser más larga que una cabecera TCP básica sin opciones.
+
+T3. Indica cuál de las siguientes afirmaciones sobre TCP es CIERTA:
+ a) Una vez establecida la conexión TCP, los segmentos tienen siempre el tamaño MSS salvo el último del mensaje 
+que puede ser menor.
+ b) En la negociación tres pasos que A realiza para establecer una conexión TCP con B, B ya puede enviar datos en 
+su segmento de aceptación.
+✅c) TCP no guarda información acerca de la longitud del mensaje de nivel de aplicación que transporta.
+
+T4. Cuando se produce una colisión en CSMA/CD, es CIERTO que:
+ a) En la actualidad no se envía ningún tipo de señal de jam por la gran mejora tecnológica que ha habido en los 
+medios compartidos.
+ b) Sólo la estación más cercana está obligada  a enviar una señal de jam para hacer evidente la colisión al resto de 
+estaciones.
+✅c) Todas las estaciones que se percaten deben enviar una señal de jam para hacer evidente la colisión al resto de 
+estaciones.
+
+T5. Indica cuál de las siguientes afirmaciones sobre circuitos virtuales es FALSA:
+ a) Pueden ofrecer calidad de servicio.
+✅b) Contienen la dirección del host final para el encaminamiento.
+ c) La ruta que siguen los paquetes es fija.
+
+T6. Durante una conversación TCP el host A establece una ventana de 2000 bytes y el host B de 1500 bytes. Si el 
+MSS es de 500 bytes, indica cuál de las siguientes afirmaciones es CIERTA.
+ a) Se puede activar Fast Retransmit de A a B.
+ b) Se puede activar Fast Retransmit de B a A.
+✅c) Se puede activar Fast Retransmit en ambos sentidos.
+
+T7. Sobre WiMAX, es CIERTO que:
+✅a) Es una tecnología de acceso a Internet especificada por un determinado subestándar de IEEE 802.
+ b) Sus siglas significan Wireless Max-distance.
+ c) Suele tener una velocidad de transferencia superior a la de la tecnología Fast Ethernet.
+
+T8. Un conector RJ-45 está asociado a un medio de transmisión por:
+✅a) Cable de par trenzado.
+ b) Fibra óptica.
+ c) Cable coaxial.
+
+T9. Indica cuál de las siguientes afirmaciones es CIERTA:
+ a) Un segmento UDP está directamente contenido dentro de una trama Ethernet.
+ b) Un paquete ICMP está directamente contenido dentro de una trama Ethernet.
+✅c) Un paquete ARP está directamente contenido dentro de una trama Ethernet.
+
+T10. ¿Cuál de los siguientes protocolos se apoya en el uso de CSMA/CD?
+✅a) IEEE 802.3
+ b) IEEE 802.11
+ c) IEEE 802.15
+
+T11. El concepto de backoff está relacionado con:
+ a) El envío de paquetes replicados para minimizar la posibilidad de pérdida de los mismos en los protocolos a nivel 
+de transporte.
+✅b) El tiempo de espera para retransmitir en caso de una colisión en un medio de acceso compartido.
+ c) El envío de paquetes replicados para minimizar la posibilidad de pérdida de los mismos en los protocolos a nivel 
+de enlace.
+
+T12. El esquema de codificación Manchester se utiliza en::
+✅a) Ethernet.
+ b) Fast Ethernet.
+ c) Gigabit Ethernet.
+
+T13. Sobre IEEE 802.1Q, es CIERTO que:
+ a) Permite a las tramas Ethernet atravesar routers sin experimentar cambios en los campos de su cabecera.
+ b) Podemos encontrar tramas siguiendo ese estándar en enlaces VLAN tanto de tipo ACCESS como de tipo 
+TRUNK.
+✅c) Añade unos campos adicionales a la cabecera de trama Ethernet para gestionar adecuadamente el tráfico en las 
+VLAN.
+
+T14. Indica cuál de las siguientes afirmaciones es CIERTA:
+ a) En un switch o conmutador, tanto el dominio de colisión como el de broadcast son uno por puerto.
+✅b) En un hub o concentrador, tanto el dominio de colisión como el de broadcast son únicos.
+ c) En un switch o conmutador VLAN, tanto el dominio de colisión como el de broadcast son por VLAN.
+
+T15. Sobre el esquema de codificación 4B/5B, es CIERTO que:
+✅a) Se emplea para evitar los posibles problemas de sincronización provocados por el envío de muchos ceros 
+seguidos en la codificación bipolar.
+ b) Se emplea para evitar la existencia de una componente de continua en la codificación bipolar.
+ c) Consigue enviar 5 bits en sólo 4 veces el tiempo de bit, aumentando así en un 20% la velocidad de transferencia.
